@@ -5,6 +5,7 @@ import { Answer } from '@/domain/entities/answer';
 import { AnswersRepository } from '@/domain/repositories/answers-repository';
 
 const fakeAnswersRespository: AnswersRepository = {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	create: async (answer: Answer) => {
 		return;
 	},
