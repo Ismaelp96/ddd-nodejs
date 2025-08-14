@@ -1,24 +1,24 @@
-import { expect, test } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
-import { QuestionsRepository } from '../repositories/questions-repository';
-import { Question } from '../../enterprise/entities/question';
 import { CreateQuestionUseCase } from './create-question';
+import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository';
 
-const fakeQuestionsRespository: QuestionsRepository = {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	create: async (answer: Question) => {
-		return;
-	},
-};
+let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
+let sut: CreateQuestionUseCase;
 
-test('create an answer', async () => {
-	const createQuestion = new CreateQuestionUseCase(fakeQuestionsRespository);
-
-	const { question } = await createQuestion.execute({
-		authorId: '1',
-		title: 'novo titulo',
-		content: 'Nova resposta',
+describe('create question', () => {
+	beforeEach(() => {
+		inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
+		sut = new CreateQuestionUseCase(inMemoryQuestionsRepository);
 	});
+	it('should be able to create a question', async () => {
+		const { question } = await sut.execute({
+			authorId: '1',
+			title: 'novo titulo',
+			content: 'Nova resposta',
+		});
 
-	expect(question.id).toBeTruthy();
+		expect(question.id).toBeTruthy();
+		expect(inMemoryQuestionsRepository.items[0].id).toEqual(question.id);
+	});
 });
