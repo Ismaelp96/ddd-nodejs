@@ -2,15 +2,16 @@ import { beforeEach, describe, expect, it } from 'vitest';
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id';
 import { DeleteAnswerUseCase } from './delete-answer';
-import { InMemoryAnswerRepository } from 'test/repositories/in-memory-answers-repository';
-import { makeAnswer } from 'test/factories/make-answer';
 
-let inMemoryAnswerRepository: InMemoryAnswerRepository;
+import { makeAnswer } from 'test/factories/make-answer';
+import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository';
+
+let inMemoryAnswerRepository: InMemoryAnswersRepository;
 let sut: DeleteAnswerUseCase;
 
 describe('Delete Answer', () => {
 	beforeEach(() => {
-		inMemoryAnswerRepository = new InMemoryAnswerRepository();
+		inMemoryAnswerRepository = new InMemoryAnswersRepository();
 		sut = new DeleteAnswerUseCase(inMemoryAnswerRepository);
 	});
 	it('should be able delete a answer', async () => {

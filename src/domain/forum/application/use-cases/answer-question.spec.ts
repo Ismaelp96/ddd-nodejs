@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { AnswerQuestionUseCase } from './answer-question';
-import { InMemoryAnswerRepository } from 'test/repositories/in-memory-answers-repository';
+import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository';
 
-let inMemoryAnswerRepository: InMemoryAnswerRepository;
+let inMemoryAnswerRepository: InMemoryAnswersRepository;
 let sut: AnswerQuestionUseCase;
 describe('Create Answer', () => {
 	beforeEach(() => {
-		inMemoryAnswerRepository = new InMemoryAnswerRepository();
+		inMemoryAnswerRepository = new InMemoryAnswersRepository();
 		sut = new AnswerQuestionUseCase(inMemoryAnswerRepository);
 	});
 	it('should be able to create an answer', async () => {
