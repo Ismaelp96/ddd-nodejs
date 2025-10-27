@@ -1,4 +1,4 @@
-import { QuestionsCommentsRepository } from '../repositories/question-comments-repository copy';
+import { QuestionsCommentsRepository } from '../repositories/question-comments-repository';
 
 interface DeleteQuestionCommentUseCaseRequest {
 	authorId: string;

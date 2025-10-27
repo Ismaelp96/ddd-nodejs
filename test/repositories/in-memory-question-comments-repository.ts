@@ -1,4 +1,4 @@
-import { QuestionsCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository copy';
+import { QuestionsCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository';
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment';
 
 export class InMemoryQuestionCommentRepository
@@ -19,6 +19,7 @@ export class InMemoryQuestionCommentRepository
 		}
 		return questionComment;
 	}
+
 	async delete(questionComment: QuestionComment) {
 		const itemIndex = this.items.findIndex(
 			(item) => item.id === questionComment.id,
