@@ -9,7 +9,7 @@ let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
 let inMemoryQuestionCommentRepository: InMemoryQuestionCommentRepository;
 let sut: CommentOnQuestionUseCase;
 
-describe('Commment on Question', () => {
+describe('Comment on Question', () => {
 	beforeEach(() => {
 		inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
 		inMemoryQuestionCommentRepository = new InMemoryQuestionCommentRepository();
