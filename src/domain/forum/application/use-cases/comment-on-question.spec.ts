@@ -2,20 +2,21 @@ import { beforeEach, describe, expect, it } from 'vitest';
 
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository';
 import { makeQuestion } from 'test/factories/make-question';
-import { InMemoryQuestionCommentRepository } from 'test/repositories/in-memory-question-comments-repository';
+import { InMemoryQuestionCommentsRepository } from 'test/repositories/in-memory-question-comments-repository';
 import { CommentOnQuestionUseCase } from './comment-on-question';
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
-let inMemoryQuestionCommentRepository: InMemoryQuestionCommentRepository;
+let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentsRepository;
 let sut: CommentOnQuestionUseCase;
 
 describe('Comment on Question', () => {
 	beforeEach(() => {
 		inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
-		inMemoryQuestionCommentRepository = new InMemoryQuestionCommentRepository();
+		inMemoryQuestionCommentsRepository =
+			new InMemoryQuestionCommentsRepository();
 		sut = new CommentOnQuestionUseCase(
 			inMemoryQuestionsRepository,
-			inMemoryQuestionCommentRepository,
+			inMemoryQuestionCommentsRepository,
 		);
 	});
 
@@ -30,7 +31,7 @@ describe('Comment on Question', () => {
 			content: 'Comentário teste',
 		});
 
-		expect(inMemoryQuestionCommentRepository.items[0].content).toEqual(
+		expect(inMemoryQuestionCommentsRepository.items[0].content).toEqual(
 			'Comentário teste',
 		);
 	});
