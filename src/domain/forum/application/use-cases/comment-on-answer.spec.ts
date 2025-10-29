@@ -2,19 +2,19 @@ import { makeAnswer } from 'test/factories/make-answer';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { CommentOnAnswerUseCase } from './comment-on-answer';
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository';
-import { InMemoryAnswerCommentRepository } from 'test/repositories/in-memory-answer-comments-repository';
+import { InMemoryAnswerCommentsRepository } from 'test/repositories/in-memory-answer-comments-repository';
 
 let inMemoryAnswerRepository: InMemoryAnswersRepository;
-let inMemoryAnswerCommentRepository: InMemoryAnswerCommentRepository;
+let inMemoryAnswerCommentsRepository: InMemoryAnswerCommentsRepository;
 let sut: CommentOnAnswerUseCase;
 
 describe('Commment on Answer', () => {
 	beforeEach(() => {
 		inMemoryAnswerRepository = new InMemoryAnswersRepository();
-		inMemoryAnswerCommentRepository = new InMemoryAnswerCommentRepository();
+		inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository();
 		sut = new CommentOnAnswerUseCase(
 			inMemoryAnswerRepository,
-			inMemoryAnswerCommentRepository,
+			inMemoryAnswerCommentsRepository,
 		);
 	});
 
@@ -29,7 +29,7 @@ describe('Commment on Answer', () => {
 			content: 'Comentário teste',
 		});
 
-		expect(inMemoryAnswerCommentRepository.items[0].content).toEqual(
+		expect(inMemoryAnswerCommentsRepository.items[0].content).toEqual(
 			'Comentário teste',
 		);
 	});
