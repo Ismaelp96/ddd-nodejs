@@ -1,3 +1,4 @@
+import { Either, left, right } from '@/core/types/either';
 import { AnswersRepository } from '../repositories/answers-repository';
 
 interface DeleteAnswerUseCaseRequest {
@@ -5,22 +6,27 @@ interface DeleteAnswerUseCaseRequest {
 	answerId: string;
 }
 
+type DeleteAnswerUseCaseReponse = Either<string, {}>;
+
 export class DeleteAnswerUseCase {
 	constructor(private answerRepository: AnswersRepository) {}
 
-	async execute({ authorId, answerId }: DeleteAnswerUseCaseRequest) {
+	async execute({
+		authorId,
+		answerId,
+	}: DeleteAnswerUseCaseRequest): Promise<DeleteAnswerUseCaseReponse> {
 		const answer = await this.answerRepository.findById(answerId);
 
 		if (!answer) {
-			throw new Error('Answer not found');
+			return left('Answer not found');
 		}
 
 		if (authorId !== answer.authorId.toString()) {
-			throw new Error('Not allowed');
+			return left('Not allowed');
 		}
 
 		await this.answerRepository.delete(answer);
 
-		return {};
+		return right({});
 	}
 }
